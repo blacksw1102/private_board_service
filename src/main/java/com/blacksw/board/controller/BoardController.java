@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,12 +26,20 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
+
 	@PostMapping("/board")
 	public void writeBoard(@RequestBody BoardDTO.RequestWrite requestWrite) {
 		logger.info("writeBoard 진입");
 		boardService.insertBoard(requestWrite);
 		logger.info("writeBoard 완료");
+	}
+	
+	@GetMapping("/board/{boardId}")
+	public BoardDTO.ResponseDetail detailBoard(@PathVariable("boardId") int boardId, @RequestBody BoardDTO.RequestDetail requestDetail) {
+		logger.info("detailBoard 진입");
+		BoardDTO.ResponseDetail responseDetail = boardService.getBoardDetail(requestDetail);
+		logger.info("detailBoard 완료");
+		return responseDetail;
 	}
 	
 	@PutMapping("/board/{boardId}")

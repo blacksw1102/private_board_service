@@ -1,8 +1,11 @@
 package com.blacksw.board.dto;
 
+import java.util.Date;
+
 import com.blacksw.board.entity.Board;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -65,6 +68,30 @@ public class BoardDTO {
 					.uid(uid)
 					.build();
 		}
+	}
+
+	@Setter
+	@Getter
+	@ToString
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class RequestDetail {
+		private int id;
+	}
+	
+	@Setter
+	@Getter
+	@Builder
+	@ToString
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class ResponseDetail {
+		private int id;
+		private String title;
+		private String content;
+		private Date createdAt;
+		private int views;
+		private String userName;
 	}
 	
 }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.blacksw.board.controller.BoardController;
 import com.blacksw.board.dto.BoardDTO;
 import com.blacksw.board.dto.BoardDTO.RequestDelete;
+import com.blacksw.board.dto.BoardDTO.RequestDetail;
 import com.blacksw.board.dto.BoardDTO.RequestUpdate;
+import com.blacksw.board.dto.BoardDTO.ResponseDetail;
 import com.blacksw.board.entity.Board;
 import com.blacksw.board.repository.BoardRepository;
 import com.blacksw.dao.CommonDao;
@@ -25,6 +27,8 @@ public class BoardService {
 	private BoardRepository repository;
 	@Autowired
 	private CommonDao commonDao;
+	
+	private BoardDTO.ResponseDetail responseDetail;
 	
 	public void insertBoard(BoardDTO.RequestWrite requestWrite) {
 		logger.info("insertBoard 진입");
@@ -52,6 +56,19 @@ public class BoardService {
 		logger.info(String.valueOf(requestDelete));
 		repository.deleteByIdAndUid(requestDelete.getId(), requestDelete.getUid());
 		logger.info("deleteBoard 완료");
+	}
+
+	public ResponseDetail getBoardDetail(BoardDTO.RequestDetail requestDetail) {
+		logger.info("getBoardDetail 진입");
+		logger.info(String.valueOf(requestDetail));
+		Optional<Board> result =  repository.findById(requestDetail.getId());
+		result.ifPresent(selectBoard -> {
+			selectBoard.setViews(selectBoard.getViews() + 1);
+			repository.save(selectBoard);
+			responseDetail = selectBoard.toResponseDetail();
+		});
+		logger.info("getBoardDetail 완료");
+		return responseDetail;
 	}
 	
 }
