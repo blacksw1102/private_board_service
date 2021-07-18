@@ -3,6 +3,7 @@ package com.blacksw.board.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,13 @@ public class BoardController {
 		logger.info("updateBoard 진입");
 		boardService.updateBoard(requestUpdate);
 		logger.info("updateBoard 완료");
+	}
+	
+	@DeleteMapping("/board/{boardId}")
+	public void deleteBoard(@PathVariable("boardId") int boardId, @RequestBody BoardDTO.RequestDelete requestDelete) {
+		logger.info("deleteBoard 진입");
+		boardService.deleteBoard(requestDelete);
+		logger.info("deleteBoard 완료");
 	}
 	
 }

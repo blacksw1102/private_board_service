@@ -50,4 +50,21 @@ public class BoardDTO {
 		}
 	}
 	
+	@Setter
+	@Getter
+	@ToString
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class RequestDelete {
+		private int id;
+		private String uid;
+		
+		public Board toEntity() {
+			return Board.builder()
+					.id(id)
+					.uid(uid)
+					.build();
+		}
+	}
+	
 }

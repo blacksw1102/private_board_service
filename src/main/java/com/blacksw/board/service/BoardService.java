@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.blacksw.board.controller.BoardController;
 import com.blacksw.board.dto.BoardDTO;
+import com.blacksw.board.dto.BoardDTO.RequestDelete;
 import com.blacksw.board.dto.BoardDTO.RequestUpdate;
 import com.blacksw.board.entity.Board;
 import com.blacksw.board.repository.BoardRepository;
@@ -18,7 +19,7 @@ import com.blacksw.dao.CommonDao;
 @Service
 public class BoardService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 
 	@Autowired
 	private BoardRepository repository;
@@ -44,6 +45,13 @@ public class BoardService {
 			repository.save(selectBoard);
 		});
 		logger.info("updateBoard 완료");
+	}
+
+	public void deleteBoard(RequestDelete requestDelete) {
+		logger.info("deleteBoard 진입");
+		logger.info(String.valueOf(requestDelete));
+		repository.deleteByIdAndUid(requestDelete.getId(), requestDelete.getUid());
+		logger.info("deleteBoard 완료");
 	}
 	
 }
