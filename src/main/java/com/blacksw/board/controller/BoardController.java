@@ -3,7 +3,9 @@ package com.blacksw.board.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,13 @@ public class BoardController {
 		logger.info("writeBoard 진입");
 		boardService.insertBoard(requestWrite);
 		logger.info("writeBoard 완료");
+	}
+	
+	@PutMapping("/board/{boardId}")
+	public void updateBoard(@PathVariable("boardId") int boardId, @RequestBody BoardDTO.RequestUpdate requestUpdate) {
+		logger.info("updateBoard 진입");
+		boardService.updateBoard(requestUpdate);
+		logger.info("updateBoard 완료");
 	}
 	
 }

@@ -16,13 +16,33 @@ public class BoardDTO {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class RequestWrite {
-		
 		private String title;
 		private String content;
 		private String uid;
 		
 		public Board toEntity() {
 			return Board.builder()
+					.title(title)
+					.content(content)
+					.uid(uid)
+					.build();
+		}
+	}
+	
+	@Setter
+	@Getter
+	@ToString
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class RequestUpdate {
+		private int id;
+		private String title;
+		private String content;
+		private String uid;
+		
+		public Board toEntity() {
+			return Board.builder()
+					.id(id)
 					.title(title)
 					.content(content)
 					.uid(uid)
