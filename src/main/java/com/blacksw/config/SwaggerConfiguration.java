@@ -1,4 +1,4 @@
-package com.blacksw.board.config;
+package com.blacksw.config;
 
 import org.springframework.context.annotation.Configuration;
 

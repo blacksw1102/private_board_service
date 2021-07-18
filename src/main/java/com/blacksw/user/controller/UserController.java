@@ -1,4 +1,4 @@
-package com.blacksw.board.controller;
+package com.blacksw.user.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
