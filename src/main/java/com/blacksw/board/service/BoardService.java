@@ -59,12 +59,10 @@ public class BoardService {
 	public ResponseDetail getBoardDetail(BoardDTO.RequestDetail requestDetail) {
 		logger.info("getBoardDetail 진입");
 		logger.info(String.valueOf(requestDetail));
-		Optional<Board> result =  repository.findById(requestDetail.getId());
-		result.ifPresent(selectBoard -> {
-			selectBoard.setViews(selectBoard.getViews() + 1);
-			repository.save(selectBoard);
-			responseDetail = selectBoard.toResponseDetail();
-		});
+		Board board =  repository.findById(requestDetail.getId()).get();
+		board.setViews(board.getViews() + 1);
+		repository.save(board);
+		responseDetail = board.toResponseDetail();
 		logger.info("getBoardDetail 완료");
 		return responseDetail;
 	}
