@@ -27,6 +27,8 @@ public class BoardDTO {
 			return Board.builder()
 					.title(title)
 					.content(content)
+					.createdAt(new Date())
+					.modifiedAt(new Date())
 					.uid(uid)
 					.build();
 		}

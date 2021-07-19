@@ -39,12 +39,14 @@ public class Board {
 	private int id;
 	private String title;
 	private String content;
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdAt;
 	@Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date modifiedAt;
 	private int views;
 	private String uid;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "uid", insertable=false, updatable=false)
 	private User user;

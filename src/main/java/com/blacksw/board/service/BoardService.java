@@ -41,13 +41,11 @@ public class BoardService {
 	public void updateBoard(RequestUpdate requestUpdate) {
 		logger.info("updateBoard 진입");
 		logger.info(String.valueOf(requestUpdate));
-		Optional<Board> oldBoard = repository.findByIdAndUid(requestUpdate.getId(), requestUpdate.getUid());
-		oldBoard.ifPresent(selectBoard -> {
-			selectBoard.setTitle(requestUpdate.getTitle());
-			selectBoard.setContent(requestUpdate.getContent());
-			selectBoard.setModifiedAt(new Date(System.currentTimeMillis()));
-			repository.save(selectBoard);
-		});
+		Board board = repository.findByIdAndUid(requestUpdate.getId(), requestUpdate.getUid()).get();
+		board.setTitle(requestUpdate.getTitle());
+		board.setContent(requestUpdate.getContent());
+		board.setModifiedAt(new Date());
+		repository.save(board);
 		logger.info("updateBoard 완료");
 	}
 
